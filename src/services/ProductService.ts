@@ -15,10 +15,13 @@ export const addProduct = async (data: ProductData) => {
 
         if(result.success) {
             const url = `${import.meta.env.VITE_API_URL}/api/products`;
+         
             await axios.post(url, result.output);
-        } else {
-            throw new Error('Datos no válidos');
+
+            return;
         }
+
+        throw new Error('Datos no válidos');
     } catch (error) {
         console.log(error);
     }
@@ -65,10 +68,13 @@ export const updateProduct = async (id: Product['id'], data: ProductData) => {
 
         if(result.success) {
             const url = `${import.meta.env.VITE_API_URL}/api/products/${id}`;
+            
             await axios.put(url, result.output)
+
+            return;
         }
 
-        throw new Error('Hubo un error...')
+        throw new Error('Hubo un error...');
     } catch (error) {
         console.log(error);
     }
@@ -79,9 +85,13 @@ export const updateProductAvailability = async (id: Product['id']) => {
         const url = `${import.meta.env.VITE_API_URL}/api/products/${id}`;
         
         await axios.patch(url);
+
+        return;
     } catch (error) {
         console.log(error);
     }
+
+    throw new Error('Hubo un error...');
 }
 
 export const deleteProduct = async (id: Product['id']) => {
@@ -90,6 +100,5 @@ export const deleteProduct = async (id: Product['id']) => {
         await axios.delete(url);
     } catch (error) {
         console.log(error);
-                
     }
 }
